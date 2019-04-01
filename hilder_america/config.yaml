@@ -1,0 +1,9 @@
+mongo:
+    host: 114.80.150.196
+    port: 27777
+    user_name: 'goojia'
+    password: 'goojia7102'
+    db: america_estate
+    collection_1: soldprice
+    collection_2: listprice
+    collection_3: rentprice
