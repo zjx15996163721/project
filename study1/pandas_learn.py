@@ -39,4 +39,7 @@ import pandas as pd
 
 # import matplotlib.pyplot as plt
 # plt.close('all')
-print('zjx')
+
+for i in range(1,10):
+    print(i)
+
