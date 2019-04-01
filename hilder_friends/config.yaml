@@ -1,0 +1,103 @@
+# local
+sh_wuye:
+    rabbit:
+        host: localhost
+        port: 5673
+        queue:
+            key_name: 'key_name'
+            wuye_sect_id: 'wuye_sect_id'
+            wuye_sect_id_detail: 'wuye_sect_id_detail'
+            wuye_building_id: 'wuye_building_id'
+    mongo:
+        host: localhost
+        port: 27017
+        db: 'wuye'
+        key_name_coll: 'key_name'
+        sect_coll: 'wuye_sect_id_new'
+        build_coll: 'wuye_building_new'
+        house_coll: 'wuye_house_info_new'
+        detail_coll: 'wuye_sect_detail_new'
+xiaozijia:
+    rabbit:
+        host: localhost
+        port: 5673
+        queue:
+            xiaozijia_num: 'xiaozijia_num'
+            xiaozijia_build: 'xiaozijia_comm'
+            xiaozijia_house: 'xiaozijia_build'
+            xiaozijia_house_detail: 'xiaozijia_house'
+    mongo:
+        host: localhost
+        port: 27017
+        db: 'friends'
+        user_name:
+        password:
+        comm_coll: 'xiaozijia_comm_fast_new'
+        build_coll: 'xiaozijia_build_fast_new'
+        house_coll: 'xiaozijia_house_fast_new'
+        detail_coll: 'xiaozijia_detail_fast_new'
+
+cityhouse:
+    rabbit:
+        host: 'localhost'
+        port: 5673
+    mongo:
+        host: '114.80.150.196'
+        port: 27777
+        db: 'friends'
+        user_name: 'goojia'
+        password: 'goojia7102'
+        comm_coll: 'cityhouse_9_3'
+
+
+# online
+#sh_wuye:
+#    rabbit:
+#        host: localhost
+#        port: 5673
+#        queue:
+#            key_name: 'key_name'
+#            wuye_sect_id: 'wuye_sect_id'
+#            wuye_sect_id_detail: 'wuye_sect_id_detail'
+#            wuye_building_id: 'wuye_building_id'
+#    mongo:
+#        host: '114.80.150.196'
+#        port: 27777
+#        db: 'wuye'
+#        user_name: 'fangjia'
+#        password: 'fangjia123456'
+#        key_name_coll: 'key_name'
+#        sect_coll: 'wuye_sect_id_new'
+#        build_coll: 'wuye_building_new'
+#        house_coll: 'wuye_house_info_new'
+#        detail_coll: 'wuye_sect_detail_new'
+#xiaozijia:
+#    rabbit:
+#        host: localhost
+#        port: 5673
+#        queue:
+#            xiaozijia_num: 'xiaozijia_num'
+#            xiaozijia_build: 'xiaozijia_build'
+#            xiaozijia_house: 'xiaozijia_house'
+#            xiaozijia_house_detail: 'xiaozijia_house_detail'
+#    mongo:
+#        host: '114.80.150.196'
+#        port: 27777
+#        db: 'friends'
+#        user_name: 'goojia'
+#        password: 'goojia7102'
+#        comm_coll: 'xiaozijia_comm'
+#        build_coll: 'xiaozijia_build'
+#        house_coll: 'xiaozijia_house'
+#        detail_coll: 'xiaozijia_detail'
+#cityhouse:
+#    rabbit:
+#        host: localhost
+#        port: 5673
+#    mongo:
+#      host: '114.80.150.196'
+#      port: 27777
+#      db: 'friends'
+#      user_name: 'cityhouse'
+#      password: 'goojia7102'
+#      comm_coll: 'cityhouse_comm'

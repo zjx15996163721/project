@@ -1,0 +1,382 @@
+from pymongo import MongoClient
+import datetime
+from datetime import datetime, timedelta, timezone
+m = MongoClient(host='192.168.0.105',
+                port=27018,
+                authSource='fangjia_craw',
+                username='developer',
+                password='goojia@123456')
+
+collection_195 = m['fangjia_craw']['third_party_price']
+
+m_235 = MongoClient(host='114.80.150.196',
+                    port=27777,
+                    username='goojia',
+                    password='goojia7102')
+
+collection_price = m_235['friends']['xiaozijia_comm']
+collection_match = m_235['friends']['xzj_yd_res_fj']
+collection_no_match = m_235['friends']['xzj_match_2018_11_13_new']
+"""
+{
+    "_id" : ObjectId("5b0e7429109818f3dc39bc30"),
+    "city" : "安庆",
+    "region" : "迎江区",
+    "block" : null,
+    "name" : "领域·阳光花园二期",
+    "address" : "沿江路",
+    "avg_price" : 11307,
+    "source" : "城市房产",
+    "district_id" : "http://aq.cityhouse.cn/ha/0006665023.html",
+    "s_date" : 201804,
+    "c_date" : ISODate("2018-05-30T09:51:36.163Z"),
+    "status" : 4
+}
+"""
+
+
+def select_price():
+    count = 0
+    for i in collection_price.find({"CityGBCode": {'$in': ['3202', '3401']},
+                                    'unit_price': {'$exists': 1, '$ne': 0}}, no_cursor_timeout=True):
+        if 'unit_price' in i.keys() and 'ConstructionId' in i.keys():
+            price = i['unit_price']
+            ConstructionId = i['ConstructionId']
+            comm_match = collection_match.find_one({'xzj_ConstructionId': ConstructionId})
+            if comm_match:
+                city = comm_match['city']
+                region = comm_match['region']
+                block = None
+                name = comm_match['fjName']
+                address = None
+                avg_price = int(price)
+                source = '小资家'
+                district_id = None
+                s_date = 201811
+                c_date = datetime.utcnow().replace(tzinfo=timezone.utc)
+
+                data = {
+                    "city": city,
+                    "region": region,
+                    "block": block,
+                    "name": name,
+                    "address": address,
+                    "avg_price": avg_price,
+                    "source": source,
+                    "district_id": district_id,
+                    "s_date": s_date,
+                    "c_date": c_date,
+                }
+                if collection_195.find_one({'source': '小资家', 's_date': s_date, 'city': city, 'region': region, 'name': name}) is None:
+                    collection_195.insert_one(data)
+                    print('插入一条数据{}'.format(data))
+                    count += 1
+                    print(count)
+                else:
+                    print('已经存在')
+            # else:
+            #     i.update({'status': 0})
+            #     collection_no_match.insert_one(i)
+            #     print('插入一条数据{}'.format(i))
+
+
+city_list = ["上海",
+             "北京",
+             "深圳",
+             "苏州",
+             "重庆",
+             "天津",
+             "广州",
+             "武汉",
+             "郑州",
+             "大连",
+             "南京",
+             "宁波",
+             "济南",
+             "杭州",
+             "成都",
+             "厦门",
+             "长沙",
+             "西安",
+             "佛山",
+             "哈尔滨",
+             "海口",
+             "太原",
+             "长春",
+             "无锡",
+             "常州",
+             "烟台",
+             "廊坊",
+             "合肥",
+             "兰州",
+             "沈阳",
+             "石家庄",
+             "惠州",
+             "中山",
+             "温州",
+             "临沂",
+             "株洲",
+             "东莞",
+             "金华",
+             "青岛",
+             "江门",
+             "贵阳",
+             "保定",
+             "昆明",
+             "福州",
+             "湘潭",
+             "泉州",
+             "乐山",
+             "绵阳",
+             "衡阳",
+             "常德",
+             "汕头",
+             "咸阳",
+             "南宁",
+             "南昌",
+             "马鞍山",
+             "襄阳",
+             "呼和浩特",
+             "沧州",
+             "宝鸡",
+             "北海",
+             "怀化",
+             "抚州",
+             "防城港",
+             "阜阳",
+             "钦州",
+             "清远",
+             "丽水",
+             "梅州",
+             "吉安",
+             "晋中",
+             "牡丹江",
+             "绍兴",
+             "湖州",
+             "乌鲁木齐",
+             "舟山",
+             "安庆",
+             "芜湖",
+             "三亚",
+             "宜昌",
+             "淮南",
+             "台州",
+             "邵阳",
+             "衡水",
+             "秦皇岛",
+             "上饶",
+             "淮安",
+             "柳州",
+             "佳木斯",
+             "泰安",
+             "新余",
+             "肇庆",
+             "张家界",
+             "黄山",
+             "宜春",
+             "九江",
+             "阿克苏",
+             "赣州",
+             "黄冈",
+             "滨州",
+             "安阳",
+             "亳州",
+             "德州",
+             "南通",
+             "荆州",
+             "郴州",
+             "安康",
+             "双鸭山",
+             "巴音郭楞",
+             "荆门",
+             "连云港",
+             "伊春",
+             "绥化",
+             "池州",
+             "白银",
+             "梧州",
+             "日照",
+             "宿迁",
+             "邯郸",
+             "济宁",
+             "安顺",
+             "鹤岗",
+             "十堰",
+             "邢台",
+             "昌吉",
+             "河池",
+             "淮北",
+             "黑河",
+             "西宁",
+             "六盘水",
+             "鸡西",
+             "崇左",
+             "定西",
+             "新乡",
+             "嘉兴",
+             "承德",
+             "咸宁",
+             "七台河",
+             "金昌",
+             "酒泉",
+             "莱芜",
+             "齐齐哈尔",
+             "六安",
+             "枣庄",
+             "东营",
+             "威海",
+             "南阳",
+             "许昌",
+             "大庆",
+             "曲靖",
+             "银川",
+             "铜陵",
+             "吕梁",
+             "盐城",
+             "陇南",
+             "玉溪",
+             "平凉",
+             "镇江",
+             "宿州",
+             "唐山",
+             "石嘴山",
+             "抚顺",
+             "延边",
+             "恩施",
+             "菏泽",
+             "湛江",
+             "娄底",
+             "锦州",
+             "塔城",
+             "丹东",
+             "天水",
+             "吉林",
+             "宣城",
+             "鹤壁",
+             "随州",
+             "萍乡",
+             "焦作",
+             "濮阳",
+             "汕尾",
+             "桂林",
+             "吴忠",
+             "云浮",
+             "永州",
+             "黄石",
+             "潍坊",
+             "大同",
+             "衢州",
+             "通化",
+             "三门峡",
+             "武威",
+             "鹰潭",
+             "洛阳",
+             "茂名",
+             "延安",
+             "宁德",
+             "孝感",
+             "龙岩",
+             "信阳",
+             "周口",
+             "张掖",
+             "阿拉善盟",
+             "韶关",
+             "巴彦淖尔",
+             "中卫",
+             "大理",
+             "徐州",
+             "营口",
+             "赤峰",
+             "包头",
+             "漳州",
+             "贵港",
+             "白城",
+             "滁州",
+             "百色",
+             "白山",
+             "鄂尔多斯",
+             "扬州",
+             "岳阳",
+             "红河",
+             "丽江",
+             "晋城",
+             "驻马店",
+             "商丘",
+             "河源",
+             "景德镇",
+             "阳江",
+             "贺州",
+             "玉林",
+             "蚌埠",
+             "聊城",
+             "辽源",
+             "开封",
+             "四平",
+             "淄博",
+             "张家口",
+             "松原",
+             "漯河",
+             "泰州",
+             "通辽",
+             "莆田",
+             "鄂州",
+             "乌海",
+             "乌兰察布",
+             "呼伦贝尔",
+             "平顶山",
+             "喀什",
+             "克拉玛依",
+             "遵义",
+             "阳泉",
+             "长治",
+             "南平",
+             "铜仁",
+             "揭阳",
+             "三明",
+             "潮州",
+             "运城",
+             "珠海",
+             "兴安盟",
+             "锡林郭勒盟",
+             "宜宾",
+             "泸州",
+             "遂宁",
+             "内江",
+             "南充",
+             "眉山",
+             "德阳",
+             "益阳",
+             "达州",
+             "自贡",
+             "盘锦",
+             "鞍山",
+             "葫芦岛",
+             "拉萨",
+             "毕节"]
+
+
+def delete_price():
+    """
+    {
+    "s_date" : 1,
+    "source" : 1,
+    "city" : 1
+    }
+    """
+    source = '小资家'
+    for city in city_list:
+        collection_195.delete_many({'source': source,
+                                    'city': city,
+                                    's_date': 201809})
+        print(city)
+
+
+def find_one():
+    a = collection_195.find_one({'source': '小资家',
+                                 'city': '上海',
+                                 's_date': 201809})
+    print(a)
+
+
+if __name__ == '__main__':
+    select_price()
