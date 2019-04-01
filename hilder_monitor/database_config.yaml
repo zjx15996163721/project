@@ -1,0 +1,15 @@
+# online
+#mysql_config:
+#    host: '192.168.0.235'
+#    port: 3336
+#    user_name: root
+#    password: 'goojia7102'
+#    db_name: hilder_monitor
+#
+# local
+mysql_config:
+  host: localhost
+  port: 3306
+  user_name: root
+  password: '123456'
+  db_name: hilder_monitor

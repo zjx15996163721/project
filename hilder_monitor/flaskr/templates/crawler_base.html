@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>炫酷的ECharts</title>
+
+    <!-- 引入 echarts.js -->
+    <!--<script src="https://cdn.bootcss.com/echarts/4.1.0.rc2/echarts.min.js"></script>-->
+
+</head>
+
+<body>
+
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="main" style="width: 800px;height:500px;margin: 0 auto;"></div>
+{% block js %}
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/echarts.common.min.js') }}"></script>
+{% endblock %}
+<script type="text/javascript">
+
+    var myChart = echarts.init(document.getElementById('main'));
+
+    var app = {
+        xday:[],
+        yvalue:[]
+    };
+
+    // 发送ajax请求，从后台获取json数据
+    $(document).ready(function () {
+       getData();
+       console.log(app.xday);
+       console.log(app.yvalue)
+    });
+
+    function getData() {
+         $.ajax({
+            url:'/crawler_info/home',
+            data:{},
+            type:'GET',
+            async:false,
+            dataType:'json',
+            success:function(data) {
+                app.xday = data.xdays;
+                app.yvalue = data.yvalues;
+                myChart.setOption({
+                    title: {
+                        text: '异步数据加载示例'
+                    },
+                    tooltip: {},
+                    legend: {
+                        data:['销量']
+                    },
+                    xAxis: {
+                        data: app.xday
+                    },
+                    yAxis: {},
+                    series: [{
+                        name: '销量',
+                        type: 'bar',
+                        data: app.yvalue
+                    }]
+                })
+            },
+            error:function (msg) {
+                console.log(msg);
+                alert('系统发生错误');
+            }
+        })
+    };
+</script>
+</body>
+</html>
