@@ -2,6 +2,7 @@ from ant_nest import *
 from yarl import URL
 
 
+
 class GithubAnt(Ant):
     """Crawl trending repositories from github"""
     item_pipelines = [
