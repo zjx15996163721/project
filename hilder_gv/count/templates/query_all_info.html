@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+
+     $.get('/query_all_info',function(count_dict){
+         var a = count_dict.data
+
+        <!--var a = { -->
+            <!--'26': { '城市': '昆明', '小区': '312877', '楼栋': '5302', '房号': '620460' }, -->
+            <!--'57': { '城市': '徐州', '小区': '0', '楼栋': '0', '房号': '0' }, -->
+            <!--'23': { '城市': '揭阳', '小区': '301', '楼栋': '0', '房号': '0' },-->
+             <!--'16': { '城市': '河池', '小区': '0', '楼栋': '0', '房号': '0' }, -->
+             <!--'29': { '城市': '娄底', '小区': '506', '楼栋': '0', '房号': '0' }, -->
+             <!--'49': { '城市': '太原', '小区': '0', '楼栋': '0', '房号': '0' }, -->
+             <!--'10': { '城市': '佛山', '小区': '58', '楼栋': '2819', '房号': '146338' }, -->
+             <!--'65': { '城市': '鹰潭', '小区': '0', '楼栋': '0', '房号': '0' }, -->
+             <!--'25': { '城市': '九江', '小区': '21678', '楼栋': '182', '房号': '20741' }-->
+             <!--}-->
+
+            for(b in a){
+                var x = '';
+                for(c in a[b]){
+                    x += c + '：' + a[b][c] + '  '
+                }
+                console.log(x)
+                $("body").append("<p>"+x+"</p>");
+            }
+    })
+
+            
+    </script>
+</body>
+</html>

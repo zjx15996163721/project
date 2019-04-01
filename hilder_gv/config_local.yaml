@@ -1,0 +1,22 @@
+gv:
+  db: 192.168.0.235
+  port: 27017
+  db_name : gv_test
+  coll_comm : community_test
+  building : building_test
+  house : house_test
+  rabbitmq_host : 192.168.0.235
+  rabbitmq_port : 5673
+top_city:
+  mysql_config:
+    host: 114.80.150.196
+    port: 3336
+    user_name: root
+    password: 'goojia7102'
+    db_name: hilder_gv
+  mongo:
+    host: '114.80.150.196'
+    port: 27777
+    username: 'goojia'
+    password: 'goojia7102'
+    db: hilder_gv
