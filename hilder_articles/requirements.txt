@@ -1,0 +1,14 @@
+certifi==2018.4.16
+chardet==3.0.4
+decorator==4.3.0
+idna==2.7
+lxml==4.2.1
+pika==0.11.2
+py==1.5.3
+pymongo==3.6.1
+PyYAML==3.12
+qiniu==7.2.2
+redis==2.10.6
+requests==2.19.0
+retry==0.9.2
+urllib3==1.23
