@@ -1,0 +1,16 @@
+rabbit:
+    host: 'localhost'
+    port: 5672
+    user_name:
+    password:
+mongo:
+    host: '114.80.150.196'
+    port: 27777
+    user_name: 'goojia'
+    password: 'goojia7102'
+mongo198:
+    host: '114.80.150.198'
+    port: 27017
+redis:
+    host: 'localhost'
+    port: 6379

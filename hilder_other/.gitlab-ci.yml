@@ -1,0 +1,12 @@
+stages:
+  - build
+before_script:
+  - git submodule foreach git pull origin master
+  - git submodule update --init --recursive
+build_image:
+  stage: build
+  only:
+    - master
+  script:
+    - sudo docker build -t hilder_other .
+    - sudo docker run hilder_other

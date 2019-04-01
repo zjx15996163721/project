@@ -1,0 +1,56 @@
+# local
+baiduqianxi:
+    mongo:
+        host: 114.80.150.196
+        port: 27017
+        db: baiduqianxi_test
+        collection: baiduqianxi_test
+baidubaike:
+    mongo:
+        host: 114.80.150.196
+        port: 27017
+        db: baike
+        collection: baike_test
+#CEIC:
+#    mongo:
+#        host: 114.80.150.196
+#        port: 27017
+#        db: CEIC
+#        State_indicators: State_indicators_test
+#        State_indicators_details: State_indicators_details_test
+#    rabbit:
+#        host: 114.80.150.196
+#        port: 5673
+#        queue: ceic_detail_url
+#old_county:
+#    mongo:
+#        host: 192.168.0.235
+#        port: 27017
+#        db: old_county
+#        collection: burg_name
+
+# online
+#baiduqianxi:
+#    mongo:
+#        host: 114.80.150.196
+#        port: 27017
+#        db: baiduqianxi
+#        collection: baiduqianxi
+#baidubaike:
+#    mongo:
+#        host: 192.168.0.136
+#        port: 27017
+#        db: fangjia_youfang
+#        collection: baike
+#CEIC:
+#    mongo:
+#        host: 192.168.0.235
+#        port: 27017
+#        db: CEIC
+#        State_indicators: State_indicators_test
+#        State_indicators_details: State_indicators_details_test
+#    rabbit:
+#        host: 192.168.0.235
+#        port: 5673
+#        queue: ceic_detail_url
+
