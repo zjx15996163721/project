@@ -1,0 +1,32 @@
+dianping:
+    rabbit:
+        host: '192.168.0.235'
+        port: 5673
+        queue:
+            city_queue: 'dzdp_city_num'
+            region_queue: 'dzdp_region_url'
+            street_queue: 'dzdp_street_url'
+            cooking_queue: 'dzdp_cooking_url'
+            first_queue: 'dzdp_firstpage'
+            list_queue: 'dzdp_listpage'
+            all_url_queue: 'dzdp_comm_url_all'
+    mongo:
+        host: '192.168.0.235'
+        port: 27017
+        db: 'crawler_dianping'
+        find_coll: 'url_list'
+        save_coll: 'shop_info_stand_test'
+
+amap:
+#    rabbitmq:
+#        host: '192.168.0.190'
+#        port: 5673
+    rabbitmq:
+        host: '192.168.0.191'
+        port: 5673
+#    rabbitmq:
+#        host: '192.168.0.192'
+#        port: 5673
+#    rabbitmq:
+#        host: '192.168.0.193'
+#        port: 5673

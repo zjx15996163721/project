@@ -1,0 +1,22 @@
+rabbit:
+    host: 'localhost'
+    port: 5673
+    user_name:
+    password:
+mongo:
+    host: '114.80.150.196'
+    port: 27777
+    user_name: 'goojia'
+    password: 'goojia7102'
+    db_name: dianping
+    shop_detail_collection: dianping_all_type
+    shop_lat_collection: dianping_all_type_lat
+mysql_config:
+    host: '114.80.150.196'
+    port: 3336
+    user_name: root
+    password: 'goojia7102'
+    db_name: dianping_config
+redis:
+    host: 'localhost'
+    port: 6379

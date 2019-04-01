@@ -1,0 +1,24 @@
+# local
+#amap:
+#    rabbitmq:
+#        host: 'localhost'
+#        port: 5673
+#    mongo:
+#        host: 'localhost'
+#        port: 27017
+#        user_name:
+#        password:
+#        db: 'amap'
+#        collection: 'poi_all_city_test'
+# online
+amap:
+    rabbitmq:
+        host: '114.80.150.196'
+        port: 5673
+    mongo:
+        host: '114.80.150.196'
+        port: 27777
+        user_name: 'goojia'
+        password: 'goojia7102'
+        db: 'amap'
+        collection: 'poi_all_type_11'
