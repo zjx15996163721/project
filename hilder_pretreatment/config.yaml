@@ -1,0 +1,23 @@
+Seaweed:
+  host: 192.168.0.136
+  port: 27017
+  username:
+  password:
+  db: fangjia
+  collection: seaweed
+
+RegionBlcok:
+  host: 192.168.0.136
+  port: 27017
+  username:
+  password:
+  db: fangjia
+  collection: region_block
+
+HouseLoudong:
+  host: 192.168.0.235
+  port: 27777
+  username: goojia
+  password: goojia7102
+  db: fangjia
+  collection: house_loudong
