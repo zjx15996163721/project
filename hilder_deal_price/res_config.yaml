@@ -1,0 +1,23 @@
+mongo_235:
+    host: '114.80.150.196'
+    port: 27777
+    user_name: 'goojia'
+    password: 'goojia7102'
+    db_name: deal_price
+    collection_second: res_second_2018_11
+    collection_newhouse: res_newhouse_2018_10
+    collection_land: res_land_2018_10
+    match_db: friends
+    collection_youda_res_xzj: xzj_yd_res_fj
+    loudong_db: fangjia
+    collection_house_loudong: house_loudong
+
+mongo_136:
+    host: '192.168.0.136'
+    port: 27017
+    db_name: business
+    collection_second: res_esfdealprice
+    collection_newhouse: res_newdealprice
+    collection_land: land_distinct
+    db_fangjia: fangjia
+    collection_seaweed: seaweed

@@ -1,0 +1,18 @@
+stages:
+  - build
+#before_script:
+#  - git submodule sync --recursive
+#  - git submodule update --init --recursive
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+build_image:
+  stage: build
+  only:
+    - master
+  script:
+    # - docker rmi deal_price
+    - cd lib
+    - git pull origin master
+    - cd ..
+    - docker build -t deal_price .
+    - docker run -d --rm -v /home/data/log:/home/data/log deal_price
