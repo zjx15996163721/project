@@ -1,0 +1,88 @@
+sh pycharm.sh &   打开pycharm
+
+启动robo3t bin目录下 ./robo3t
+
+git config --global credential.helper store  git取消输入用户名密码
+
+
+unzip chromedriver_linux64.zip  解压文件
+
+cp chromedriver /usr/bin/    移动到对应的路径下
+
+rm    删除
+
+
+vim Dockerfile    i  编辑   Esc : wq 保存退出
+
+
+压缩文件
+
+zip -r hilder_auction hilder_auction
+
+
+
+unzip hilder_auction.zip
+
+ps 查看进程
+
+kill -s 9 进程PID
+
+
+
+传输
+
+scp hilder_auction.zip root@114.80.150.196:~
+
+scp hilder_gv.zip chengjiwen@192.168.10.166:~  123456
+
+# 连接
+
+ssh root@192.168.0.136
+
+ssh -o ServerAliveInterval=60 root@114.80.150.196
+
+
+# 创建虚拟环境
+
+virtualenv  -p /usr/bin/python3 py3env
+
+# 激活虚拟环境
+
+source /home/xyy/py3env/bin/activate
+
+# 退出虚拟环境
+
+deactivate
+
+
+top 查看进程
+
+cat 查看日志
+
+
+sudo lsof -i:8080
+
+
+
+
+docker 进入redis内部
+
+docker exec -it 89d7d7f54999 redis-cli
+
+key *
+
+del key
+
+
+
+
+docker pull rabbitmq:management
+sudo docker run --name myrabbitmq -p 5673:5672 -p 15673:15672 -d rabbitmq:management
+web页面  localhost:15673
+
+docker pull mysql:5.5
+docker run -p 3306:3306 --name mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.5
+
+docker pull mongo 
+docker run --name mymongo -p 27017:27017 -d mongo
+

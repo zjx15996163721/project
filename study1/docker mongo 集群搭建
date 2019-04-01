@@ -1,0 +1,75 @@
+一:获取ubuntu镜像
+docker pull ubuntu:14.04
+二:编写dockerfile文件
+vim Dockerfile
+
+FROM ubuntu:14.04
+RUN apt-get clean
+RUN apt-get update
+RUN apt-get install -y g++
+RUN apt-get install -y openssh-server 
+RUN mkdir -p /var/run/sshd
+EXPOSE 22
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+ENV MONGO_MAJOR 3.0
+RUN echo "deb http://repo.mongodb.org/apt/debian wheezy/mongodb-org/$MONGO_MAJOR main" > /etc/apt/sources.list.d/mongodb-org.list
+RUN apt-get update
+RUN sudo apt-get install -y mongodb-org=3.0.4 mongodb-org-server=3.0.4 mongodb-org-shell=3.0.4 mongodb-org-mongos=3.0.4 mongodb-org-tools=3.0.4
+RUN mkdir -p /data/db
+EXPOSE 27017
+ENTRYPOINT ["usr/bin/mongod"]
+
+三: 生成带有mongodb的镜像
+docker build -t zjx/mongos:master .
+
+四:启动3个容器
+docker run --name rs_server1 -p 21117:27017 -d zjx/mongos:master --noprealloc --smallfiles --replSet rs1
+docker run --name rs_server2 -p 22117:27017 -d zjx/mongos:master --noprealloc --smallfiles --replSet rs1
+docker run --name rs_server3 -p 23117:27017 -d zjx/mongos:master --noprealloc --smallfiles --replSet rs1
+
+五:查看IP
+docker exec 容器的ID ifconfig
+(我的是172.17.0.3, 172.17.0.4,172.17.0.5  第七步用到)
+六:使用本机mongo客户端连到21117
+mongo --port 21117
+
+七:开始配置 复制集的成员信息
+myconf = {"_id":"rs1","members":[{"_id":0,"host":"172.17.0.3:27017"},{"_id":1,"host":"172.17.0.4:27017"},{"_id":2,"host":"172.17.0.5:27017"}]}
+
+八:初始化同步复制集群
+rs.initiate(myconf)
+
+九:查看当前复制集的节点信息(主节点,成员信息)
+rs.isMaster()
+rs.status()
+rs.conf()
+
+十:开启另外两个终端,连接第二个容器
+mongo --port 22117
+rs.isMaster()   
+re.status()
+
+
+mongo --port 23117
+rs.status()
+
+
+show dbs;
+从节点需要设置
+db.getMongo().setSlaveOk();
+show dbs;
+
+到此就全部设置好了
+
+十一:尝试插入数据,看看是否同步,关闭主节点,查看从节点是否变为主节点
+在主节点下执行插入操作
+use zjx   # 建库
+db.test.insert({"name":'zjx"})  # 插入数据
+
+show dbs;
+show collections;
+db.user.find()
+
+
+
+
