@@ -25,7 +25,7 @@ hyperframe==3.2.0
 hyperlink==18.0.0
 idna==2.6
 incremental==17.5.0
-lxml==4.2.4
+lxml==4.6.3
 multidict==4.3.1
 numpy==1.15.1
 pandas==0.23.4
