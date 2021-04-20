@@ -4,7 +4,7 @@ decorator==4.3.0
 idna==2.7
 lxml==4.2.5
 lxmlxtree==0.0.3
-py==1.7.0
+py==1.10.0
 pymongo==3.7.1
 PyYAML==3.13
 qiniu==7.2.2
